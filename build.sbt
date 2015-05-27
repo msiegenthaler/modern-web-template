@@ -1,6 +1,8 @@
 name := "modern-web-template"
 
-version := "0.1-SNAPSHOT"
+val conf = com.typesafe.config.ConfigFactory.parseFile(new File("conf/application.conf")).resolve()
+
+version := conf.getString("application.version")
 
 scalaVersion := "2.11.6"
 

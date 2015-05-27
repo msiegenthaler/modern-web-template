@@ -18,6 +18,8 @@ class Application @Inject() (uuidGenerator: UUIDGenerator) extends Controller {
 
   private final val logger: Logger = LoggerFactory.getLogger(classOf[Application])
 
+  val version = Play.configuration.getString("application.version").getOrElse("unknown")
+
   def index = Action {
     logger.info("Serving index page...")
 
@@ -34,7 +36,7 @@ class Application @Inject() (uuidGenerator: UUIDGenerator) extends Controller {
       }
     }
 
-    Ok(views.html.index(javascripts))
+    Ok(views.html.index(javascripts, version))
   }
 
   private def findScripts(base: File): Seq[String] = {
